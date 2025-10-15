@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { WIALON_BASE_URL } from "../../config/config"
 
-export const getSid = async (token: string): Promise<string | null> => {
+export const getSid = async (token: string): Promise<string> => {
     const url = `${WIALON_BASE_URL}?svc=token/login&params=${JSON.stringify({ token })}`;
 
     try {
@@ -10,6 +10,6 @@ export const getSid = async (token: string): Promise<string | null> => {
 
         return sid;
     } catch (error) {
-        return null;
+        throw new Error('Failed to retrieve SID');
     }
 }
