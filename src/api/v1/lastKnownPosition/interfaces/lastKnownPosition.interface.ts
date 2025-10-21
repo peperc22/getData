@@ -5,3 +5,7 @@ export interface getUnitByVin {
 export interface GetUnitByName {
     name: string;
 }
+
+export interface GetGroupByName {
+    group: string;
+}

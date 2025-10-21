@@ -35,7 +35,7 @@ const execReport = async (
 
 //execReport('400081093', '56', '400081059', '41602be2155a5793137f012458e7e36f');
 
-const getData = async (sid: string) => {
+const getData = async (sid: string, searchMode: "vin" | "name" | "group") => {
     const params = {
         tableIndex: "0",
         config: {
@@ -52,30 +52,37 @@ const getData = async (sid: string) => {
 
     try {
         const response = await axios.get(url);
-        const data = response.data[0].c;
-
-        return data;
+        
+        return searchMode !== "group" ? [response.data[0]] : response.data;
     } catch (error) {
-        console.error(error);
+        console.error('Get data error: ', error);
         return null;
     }
 }
 
-export const executeReportFlow = async (sid: string, resourceId: string, templateId: string, objectId: string) => {
+export const executeReportFlow = async (
+    sid: string, 
+    resourceId: string, 
+    templateId: string, 
+    objectId: string, 
+    searchMode: "vin" | "name" | "group" 
+) => {
     const exec = await execReport(resourceId, templateId, objectId, sid);
     if (!exec) throw new Error('Exec report failed');
 
-    const data = await getData(sid);
+    const data = await getData(sid, searchMode);
     if (!data) throw new Error('Get data failed');
-
-    const lastPos: LastPosData = {
-        name: data[0],
-        vin: data[1],
+    
+    const mapItem = (item: any): LastPosData => ({
+        name: item.c[0],
+        vin: item.c[1],
         position: {
-            latitude: data[2].y,
-            longitude: data[2].x
-        }
-    }
+            latitude: item.c[2].y,
+            longitude: item.c[2].x
+        },
+    });
+    
+    if (searchMode !== "group") return mapItem(data[0]);
 
-    return lastPos;
+    return data.map(mapItem);
 }

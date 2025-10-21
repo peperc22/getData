@@ -22,7 +22,7 @@ const getUnitLastKnownPositionHandler = async (
         const templateId = await getTemplateId("webservice_lastPos_apiv2", Number(resourceId), sid);
 
         const unitId = await getUnitId(searchValue, searchMode, sid);
-        const data = await executeReportFlow(sid, resourceId, String(templateId), String(unitId));
+        const data = await executeReportFlow(sid, resourceId, String(templateId), String(unitId), searchMode);
 
         res.status(200).json({ data });
     } catch (error) {
