@@ -44,7 +44,6 @@ export const getTemplateId = async (templateName: string, resourceId: number, si
         const template = Object.values(resourceItem.rep).find((template) => template.n === templateName);
         if (!template) throw new Error('Template not found');
 
-        console.log(template.id);
         return template.id;
     } catch (error) {
         console.error(error);
