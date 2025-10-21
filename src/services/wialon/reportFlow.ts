@@ -1,5 +1,6 @@
 import axios from "axios";
 import { WIALON_BASE_URL } from "../../config/config"
+import { LastPosData } from "../../interfaces/wialon.interface";
 
 const execReport = async (
     resourceId: string,
@@ -51,8 +52,9 @@ const getData = async (sid: string) => {
 
     try {
         const response = await axios.get(url);
+        const data = response.data[0].c;
 
-        return response.data;
+        return data;
     } catch (error) {
         console.error(error);
         return null;
@@ -66,5 +68,14 @@ export const executeReportFlow = async (sid: string, resourceId: string, templat
     const data = await getData(sid);
     if (!data) throw new Error('Get data failed');
 
-    return data;
+    const lastPos: LastPosData = {
+        name: data[0],
+        vin: data[1],
+        position: {
+            latitude: data[2].y,
+            longitude: data[2].x
+        }
+    }
+
+    return lastPos;
 }

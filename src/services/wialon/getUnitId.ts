@@ -12,7 +12,7 @@ export const getUnitId = async (vin: string, sid: string) => {
         force: 1,
         flags: 1,
         from: 0,
-        too: 0,
+        to: 0,
     };
     const url = `${WIALON_BASE_URL}?svc=core/search_items&params=${JSON.stringify(params)}&sid=${sid}`;
 
@@ -22,6 +22,7 @@ export const getUnitId = async (vin: string, sid: string) => {
 
         return unitId;
     } catch (error) {
+        console.error('No unitId found');
         throw new Error(`Wialon error: ${error}`);
     }
 }
