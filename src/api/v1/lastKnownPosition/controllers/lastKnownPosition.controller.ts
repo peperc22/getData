@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import { AuthRequest } from "../../../../interfaces/auth.interface";
-import { getUnitByName } from "../interfaces/lastKnownPosition.interface";
+import { getUnitByVin } from "../interfaces/lastKnownPosition.interface";
 import { getSecret } from "../../../../services/aws/getSecrets";
 import { executeReportFlow } from "../../../../services/wialon/reportFlow";
 import { getSid } from "../../../../services/wialon/getSid";
 import { getTemplateId } from "../../../../services/wialon/getTemplateId";
 
-export const getUnitLastKnownPosition = async (req: AuthRequest & { params: getUnitByName }, res: Response) => {
+export const getUnitLastKnownPosition = async (req: AuthRequest & { params: getUnitByVin }, res: Response) => {
     try {
         const ref = req.user?.ref;
         const { unitVin } = req.params;
