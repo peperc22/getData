@@ -17,7 +17,7 @@ interface SearchResponse {
   items: ResourceItem[];
 }
 
-export const getTemplateId = async (templateName: string, objectId: number, sid: string): Promise<number> => {
+export const getTemplateId = async (templateName: string, resourceId: number, sid: string): Promise<number> => {
     const params = {
         spec: {
             itemsType: "avl_resource",
@@ -38,7 +38,7 @@ export const getTemplateId = async (templateName: string, objectId: number, sid:
         const response = await axios.get<SearchResponse>(url);
         const { items } = response.data;
 
-        const resourceItem = items.find((item) => item.id === objectId);
+        const resourceItem = items.find((item) => item.id === resourceId);
         if (!resourceItem) throw new Error('Resource not found');
 
         const template = Object.values(resourceItem.rep).find((template) => template.n === templateName);
@@ -47,6 +47,7 @@ export const getTemplateId = async (templateName: string, objectId: number, sid:
         console.log(template.id);
         return template.id;
     } catch (error) {
+        console.error(error);
         throw new Error('Template not found');
     }
 }

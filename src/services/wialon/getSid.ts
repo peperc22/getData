@@ -10,6 +10,7 @@ export const getSid = async (token: string): Promise<string> => {
 
         return sid;
     } catch (error) {
+        console.error('Failed to retrieve sid: ', error);
         throw new Error('Failed to retrieve SID');
     }
 }

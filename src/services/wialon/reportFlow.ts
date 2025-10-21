@@ -32,7 +32,7 @@ const execReport = async (
     }
 }
 
-execReport('400081093', '56', '400081059', '41602be2155a5793137f012458e7e36f');
+//execReport('400081093', '56', '400081059', '41602be2155a5793137f012458e7e36f');
 
 const getData = async (sid: string) => {
     const params = {
@@ -47,7 +47,7 @@ const getData = async (sid: string) => {
             }
         }
     };
-    const url = `${WIALON_BASE_URL}?svc=select_result_rows&params=${JSON.stringify(params)}&sid=${sid}`
+    const url = `${WIALON_BASE_URL}?svc=report/select_result_rows&params=${JSON.stringify(params)}&sid=${sid}`
 
     try {
         const response = await axios.get(url);

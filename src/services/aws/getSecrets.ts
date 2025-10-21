@@ -11,6 +11,7 @@ export const getSecret = async (secretName: string) => {
     const secretString = response.SecretString ?? null;
     return secretString ? JSON.parse(secretString) : (() => { throw new Error('Secret not found'); })();
   } catch (error) {
+    console.error('Error fetching secrets: ', error);
     throw new Error(`Failed to fetch secret ${secretName}: ${error}`);
   }
 }
