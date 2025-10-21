@@ -26,6 +26,5 @@ export const getUnitId = async (vinOrName: string, searchMode: "vin" | "name" | 
         return unitId;
     } catch (error) {
         console.error('No unitId found');
-        throw new Error(`Wialon error: ${error}`);
     }
 }

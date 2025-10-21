@@ -17,7 +17,9 @@ export const getGroupLastKnownPositionHandler = async (
         const { token, resourceId, objectId } = await getSecret(`prod/wialon/env-${ref}`);
         const sid = await getSid(token);
 
-        const groupId = await getUnitId(group, "group", sid);        
+        const groupId = await getUnitId(group, "group", sid);
+        if (groupId !== Number(objectId)) return res.status(404).json({ error: 'Group not found' });
+        
         const templateId = await getTemplateId("webservice_lastPos_apiv2", Number(resourceId), sid);
 
         const data = await executeReportFlow(sid, resourceId, String(templateId), objectId, "group");

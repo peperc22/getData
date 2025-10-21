@@ -22,6 +22,8 @@ const getUnitLastKnownPositionHandler = async (
         const templateId = await getTemplateId("webservice_lastPos_apiv2", Number(resourceId), sid);
 
         const unitId = await getUnitId(searchValue, searchMode, sid);
+        if (!unitId) return res.status(404).json({ error: 'Unit not found' });
+        
         const data = await executeReportFlow(sid, resourceId, String(templateId), String(unitId), searchMode);
 
         res.status(200).json({ data });
