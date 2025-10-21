@@ -1,12 +1,14 @@
 import axios from "axios";
 import { WIALON_BASE_URL } from "../../config/config";
 
-export const getUnitId = async (vin: string, sid: string) => {
+export const getUnitId = async (vinOrName: string, searchMode: "vin" | "name" ,sid: string) => {
+    const propName = searchMode === "vin" ? "rel_customfield_value" : "sys_name";
+
     const params = {
         spec: {
             itemsType: "avl_unit",
-            propName: "rel_customfield_value",
-            propValueMask: vin,
+            propName: propName,
+            propValueMask: vinOrName,
             sortType: ""
         },
         force: 1,
