@@ -1,6 +1,7 @@
 import axios from "axios";
 import { WIALON_BASE_URL } from "../../config/config"
 import { LastPosData } from "../../interfaces/wialon.interface";
+import { dayStartAndEndUnixTime } from "../../utils/unixTimeGenerator";
 
 const execReport = async (
     resourceId: string,
@@ -8,14 +9,15 @@ const execReport = async (
     objectId: string,
     sid: string,
 ): Promise<string | null> => {
+    const { dayStart, dayEnd } = dayStartAndEndUnixTime();
     const params = {
         reportResourceId: resourceId,
         reportTemplateId: templateId,
         reportObjectId: objectId,
         reportObjectSecId: 0,
         interval: {
-            from: 1760508001,
-            to: 1760594399,
+            from: dayStart,
+            to: dayEnd,
             flags: 0
         },
         remoteExec: 0,
