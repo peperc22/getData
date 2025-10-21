@@ -1,3 +1,3 @@
-export interface getUnitByName {
-    unitName: string;
+export interface getUnitByVin {
+    unitVin: string;
 }

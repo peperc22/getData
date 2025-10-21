@@ -9,7 +9,7 @@ import { getTemplateId } from "../../../../services/wialon/getTemplateId";
 export const getUnitLastKnownPosition = async (req: AuthRequest & { params: getUnitByName }, res: Response) => {
     try {
         const ref = req.user?.ref;
-        const { unitName } = req.params;
+        const { unitVin } = req.params;
 
         const { token, resourceId, objectId } = await getSecret(`prod/wialon/env-${ref}`);
         const sid = await getSid(token);

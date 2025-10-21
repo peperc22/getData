@@ -3,6 +3,6 @@ import { getUnitLastKnownPosition } from "../controllers/lastKnownPosition.contr
 
 const lastKnownPositionRouter = Router();
 
-lastKnownPositionRouter.get('/lastKnownPosition/:unitName', getUnitLastKnownPosition);
+lastKnownPositionRouter.get('/lastKnownPosition/:unitVin', getUnitLastKnownPosition);
 
 export default lastKnownPositionRouter;
