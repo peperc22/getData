@@ -1,6 +1,15 @@
 import { SecretsManagerClient, GetSecretValueCommand } from "@aws-sdk/client-secrets-manager";
+import dotenv from "dotenv";
 
-const client = new SecretsManagerClient();
+dotenv.config();
+
+const client = new SecretsManagerClient({
+  region: process.env.AWS_REGION!,
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+  }
+});
 
 export const getSecret = async (secretName: string) => {
   try {
