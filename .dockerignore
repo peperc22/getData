@@ -1,0 +1,16 @@
+node_modules/
+dist/
+
+# environment files
+.env*
+
+# docker files
+Dockerfile
+docker-compose*.yml
+
+# npm debug logs
+npm-debug.log*
+
+# system files
+.DS_Store
+README.md
