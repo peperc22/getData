@@ -4,7 +4,7 @@
 
 <h3 align="center">Tools</h3>
 <p align="center">
-<img width="450px"  src="https://skillicons.dev/icons?i=docker,nodejs,express,ts&perline=8"  />
+<img width="300px"  src="https://skillicons.dev/icons?i=docker,nodejs,express,ts&perline=8"  />
 </p>
 
 The B2B Tracking API is a backend service built with Express.js and TypeScript to provide last known position data for tracking units. It is designed to be containerized using Docker for consistent and reliable deployment across different environments. The API retrieves data from the Wialon tracking platform and leverages AWS Secrets Manager for secure handling of credentials.
